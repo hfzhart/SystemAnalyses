@@ -4,11 +4,10 @@ function Header() {
   return (
     <div className="container">
       <p>Hello</p>
-      <p>Niggers</p>
-      useState
+      <p>Biggers</p>
           </div>
-  );    
-}
-
-export default Header;
+          
+  );  
+  }
+export default Header
 
