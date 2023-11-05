@@ -20,11 +20,11 @@ function RegistrationForm() {
   const [password, setPassword] = useState('');
   const [repassword, setRePassword] = useState('');
   useEffect(() => {
-    setPassword(''); // Установите пароль в пустую строку при монтировании
+    setPassword(''); 
   }, []);
 
   const handleRegistration = () => {
-    // Ваша логика регистрации
+  
   };
 
   return (
