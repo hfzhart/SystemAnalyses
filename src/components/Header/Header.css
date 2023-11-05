@@ -1,0 +1,16 @@
+.Welcome-Title{
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    caret-color: transparent;
+}
+
+.titleCarret{
+    caret-color: transparent;
+      
+}
+.loginButton{
+    caret-color: transparent;
+}
+.regButton{
+    caret-color: transparent;
+}

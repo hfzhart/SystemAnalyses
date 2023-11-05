@@ -1,13 +1,56 @@
-import './styles.css';
+import { useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Container from '@mui/material/Container';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import MenuIcon from '@mui/icons-material/Menu';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import RegistrationForm from '../RegistrationForm/RegistrationForm';
+import LoginForm from '../LoginForm/LoginForm';
+import './Header.css';
 
 function Header() {
-  return (
-    <div className="container">
-      <p>Hello!</p>
-      <p>World!!</p>
-          </div>
-          
-  );  
-  }
-export default Header
+  const [open, setOpen] = useState(false);
+  const [isLoginForm, setIsLoginForm] = useState(true);
 
+  const handleClickOpen = (isLoginForm) => {
+    setOpen(true);
+    setIsLoginForm(isLoginForm); 
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <AppBar position="fixed">
+      <Container fixed>
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography className='titleCarret' variant="h6" style={{ flexGrow: 1 }}>System Analyses</Typography>
+          <Box>
+            <Button className='loginButton' color="inherit" variant="outlined" onClick={() => handleClickOpen(true)}>Вхід</Button>
+          </Box>
+          <Box ml={2}>
+            <Button className='regButton' color="secondary" variant="contained" onClick={() => handleClickOpen(false)}>Реєстрація</Button>
+          </Box>
+        </Toolbar>
+      </Container>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle className='Welcome-Title'>{isLoginForm ? '':'' }</DialogTitle>
+        <DialogContent>
+          {isLoginForm ? <LoginForm /> : <RegistrationForm />}
+        </DialogContent>
+      </Dialog>
+    </AppBar>
+  );
+}
+
+export default Header;
