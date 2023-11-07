@@ -32,7 +32,7 @@ function RegistrationForm() {
       <Container maxWidth="sm">
         <Box my={4} textAlign="center">
           <Typography className="RegText" variant="h4" color="primary">
-            Реєстрація
+            Реєстрація!
           </Typography>
         </Box>
         <Box mx={2}>
