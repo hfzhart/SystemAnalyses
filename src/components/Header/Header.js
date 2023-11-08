@@ -28,18 +28,21 @@ function Header() {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" style={{ backgroundColor: 'white' }}>
       <Container fixed>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
+        <IconButton edge="start" color="primary" style={{ marginCenter: 'auto' }} aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography className='titleCarret' variant="h6" style={{ flexGrow: 1 }}>System Analyses</Typography>
+          <Typography className='titleCarret' color="primary" variant="h6" style={{ flexGrow: 1, fontFamily: 'IBM Plex Sans,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji', fontSize: '20px', fontWeight: 700 }}>
+  System Analyses
+</Typography>
+
           <Box>
-            <Button className='loginButton' color="inherit" variant="outlined" onClick={() => handleClickOpen(true)}>Вхід</Button>
+            <Button className='loginButton' color="primary" variant="outlined" style={{ fontFamily: 'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji' }} onClick={() => handleClickOpen(true)}>Вхід</Button>
           </Box>
           <Box ml={2}>
-            <Button className='regButton' color="secondary" variant="contained" onClick={() => handleClickOpen(false)}>Реєстрація</Button>
+          <Button className='regButton' color="primary" variant="contained" style={{ fontFamily: 'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji' }} onClick={() => handleClickOpen(false)}>Реєстрація</Button>
           </Box>
         </Toolbar>
       </Container>

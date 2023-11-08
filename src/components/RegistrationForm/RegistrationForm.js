@@ -6,7 +6,7 @@ import './RegistrationForm.css';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#9087FA',
+      main: '#1976d2',
     },
     background: {
       default: '#f0f0f0',
@@ -23,14 +23,19 @@ function RegistrationForm() {
     setPassword(''); 
   }, []);
 
+  const formStyles = {
+    fontFamily: 'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+    
+  };
+
   const handleRegistration = () => {
-  
+    
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="sm">
-        <Box my={4} textAlign="center">
+        <Box my={2} textAlign="center">
           <Typography className="RegText" variant="h4" color="primary">
             Реєстрація
           </Typography>
@@ -38,48 +43,52 @@ function RegistrationForm() {
         <Box mx={2}>
           <TextField
             type="text"
-            label="ІМ'Я"
+            label="Ім'я"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             fullWidth
+            style={formStyles}
           />
         </Box>
         <Box mx={2} my={2}>
           <TextField
             type="email"
-            label="EMAIL"
+            label="E-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             fullWidth
+            style={formStyles} 
           />
         </Box>
         <Box mx={2} my={2}>
           <TextField
             type="password"
-            label="ПАРОЛЬ"
+            label="Пароль"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="new-password"
             fullWidth
+            style={formStyles} 
           />
         </Box>
         <Box mx={2} my={2}>
           <TextField
             type="password"
-            label="ПІДТВЕРДИТИ ПАРОЛЬ"
+            label="Підтвердити пароль"
             value={repassword}
             onChange={(e) => setRePassword(e.target.value)}
             fullWidth
+            style={formStyles} 
           />
         </Box>
-        <Box mx={2} my={3}>
+        <Box mx={10} my={2}>
           <Button
             onClick={handleRegistration}
             variant="contained"
             color="primary"
             fullWidth
           >
-            ЗАРЕЄСТРУВАТИСЬ
+            Зареєструватись
           </Button>
         </Box>
       </Container>
