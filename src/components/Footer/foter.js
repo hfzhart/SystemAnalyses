@@ -1,5 +1,5 @@
 import React from 'react';
-import './foter.css'
+import './foter.css';
 
 function Footer() {
   const footerStyles = {
@@ -17,9 +17,9 @@ function Footer() {
       <div className="footer-content">
         <p>&copy; 2023 SystemAnalyses. Усі права захищені.</p>
         <ul>
-          <li><a href="#">Політика конфіденційності</a></li>
-          <li><a href="#">Умови використання сайту</a></li>
-          <li><a href="#">Допомога користувачеві</a></li>
+          <li><a href="/privacy-policy">Політика конфіденційності</a></li>
+          <li><a href="/terms-of-use">Умови використання сайту</a></li>
+          <li><a href="/help">Допомога користувачеві</a></li>
         </ul>
       </div>
     </footer>
