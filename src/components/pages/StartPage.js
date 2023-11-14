@@ -1,4 +1,5 @@
 import React from "react";
+import MyLineChart from "../Lines/MyLineChart";
 import Header from "../Header";
 import Footer from "../Footer/foter";
 import './StartPage.css'
@@ -8,9 +9,30 @@ function StartPage() {
     <div className="start-page-container">
       <Header />
       <div className="content-container">
-        <h1>Welcome to start page!</h1>
+        <h1>Welcome to start page!</h1>     
       </div>
-      <Footer />
+      <div className="LineChart">
+        <MyLineChart/>   
+      </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+      <div className="spacer"></div>
+      <div className="footer-wrapper">
+        <Footer />
+      </div>
     </div>
   );
 }

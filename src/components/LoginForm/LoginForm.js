@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './loginForm.css';
-import { TextField, Button, Typography, Box, Alert } from '@mui/material';
+import { TextField, Button, Typography, Box, Alert, IconButton, InputAdornment} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import { useNavigate, Link } from 'react-router-dom';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const theme = createTheme({
   palette: {
     primary: {
@@ -20,10 +21,12 @@ const theme = createTheme({
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const { enqueueSnackbar } = useSnackbar();
   const handleLogin = async () => {
+
     try {
       const response = await axios.get('http://localhost:3001/users', {
         params: {
@@ -33,7 +36,7 @@ function LoginForm() {
       });
 
       if (response.data.length > 0) {
-        
+        localStorage.setItem('isLoggedIn', 'true');
         console.log(response.data);
         enqueueSnackbar('Успішний Вхід!', { variant: 'success' });
         setTimeout(() => {
@@ -41,11 +44,11 @@ function LoginForm() {
         }, 1000);
       } else {
         
-        setError('Invalid email or password. Please try again.');
+        setError('Невірна адреса електронної пошти або пароль. Будь ласка спробуйте ще раз.');
       }
     } catch (error) {
       console.error('Login failed:', error);
-      setError('An error occurred during login. Please try again later.');
+      setError('Під час входу сталася помилка. Будь-ласка спробуйте пізніше.');
     }
   };
 
@@ -81,7 +84,7 @@ function LoginForm() {
           </div>
           <div className="data-container">
             <TextField
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               label="Пароль"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -92,6 +95,23 @@ function LoginForm() {
                 marginBottom: '16px',
                 fontFamily:
                   'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      edge="end"
+                      color="primary"
+                    >
+                      {showPassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
               }}
             />
           </div>

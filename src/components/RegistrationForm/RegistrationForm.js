@@ -1,13 +1,13 @@
-// RegistrationForm.js
-
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Typography, Container, Box } from '@mui/material';
+import { TextField, Button, Typography, Box,IconButton, InputAdornment,Container} from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import axios from 'axios';
 import './RegistrationForm.css';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Link } from 'react-router-dom';
 
 const theme = createTheme({
@@ -24,6 +24,15 @@ const theme = createTheme({
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+async function checkEmailExistence(email) {
+  try {
+    const response = await axios.get(`http://localhost:3001/users?email=${email}`);
+    return response.data.length > 0;
+  } catch (error) {
+    console.error('Error checking email existence:', error);
+    return false; 
+  }
+}
 
 function RegistrationForm() {
   const [username, setUsername] = React.useState('');
@@ -33,36 +42,42 @@ function RegistrationForm() {
   const [validationError, setValidationError] = React.useState('');
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-
+  const [showPassword, setShowPassword] = useState(false);
+ const [showRePassword, setShowRePassword] = useState(false);
   const formStyles = {
     fontFamily: 'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
   };
 
   const handleRegistration = async () => {
     if (!username || !email || !password || !repassword) {
-      setValidationError('Please fill in all fields.');
+      setValidationError('Будь ласка, заповніть усі поля.');
+      return;
+    }
+    const emailExists = await checkEmailExistence(email);
+    if (emailExists) {
+      setValidationError('Цей імейл вже зареєстрований.');
       return;
     }
 
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(email)) {
-      setValidationError('Invalid email address. Use only English letters.');
+      setValidationError('Невірна адреса електронної пошти. Використовуйте лише англійські літери.');
       return;
     }
   // eslint-disable-next-line
     const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]+$/;
     if (!passwordRegex.test(password)) {
-      setValidationError('Invalid password. Use only English letters and numbers.');
+      setValidationError('Недійсний пароль. Використовуйте лише англійські літери та цифри.');
       return;
     }
 
     if (password.length < 6) {
-      setValidationError('Password must be at least 6 characters long.');
+      setValidationError('Пароль має бути не менше 6 символів.');
       return;
     }
 
     if (password !== repassword) {
-      setValidationError('Passwords do not match.');
+      setValidationError('Паролі не збігаються.');
       return;
     }
 
@@ -74,6 +89,10 @@ function RegistrationForm() {
       });
 
       console.log(response.data);
+      if (response.data.user) {
+        
+        localStorage.setItem('isLoggedIn', 'true');
+      }
       enqueueSnackbar('Реєстрація успішна!', { variant: 'success' });
       setTimeout(() => {
         navigate('/login');
@@ -82,10 +101,10 @@ function RegistrationForm() {
     } catch (error) {
       console.error('Registration failed:', error);
 
-      if (error.response && error.response.status === 400 && error.response.data.error === 'Email is already registered') {
-        setValidationError('Этот адрес электронной почты уже зарегистрирован.');
+      if (error.response && error.response.status === 400 && error.response.data.error === 'Ця електронна адреса вже зареєстрована') {
+        setValidationError('Ця електронна адреса вже зареєстрована.');
       } else {
-        setValidationError('Ошибка регистрации. Пожалуйста, попробуйте еще раз.');
+        setValidationError('Помилка реєстрації. Будь ласка, спробуйте ще раз.');
       }
     }
   };
@@ -121,13 +140,30 @@ function RegistrationForm() {
           </Box>
           <Box mx={2} my={2}>
             <TextField
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               label="Пароль"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="new-password"
               fullWidth
               style={formStyles}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      edge="end"
+                      color="primary"
+                    >
+                      {showPassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           </Box>
           <Box mx={2} my={2}>
@@ -138,6 +174,24 @@ function RegistrationForm() {
               onChange={(e) => setRePassword(e.target.value)}
               fullWidth
               style={formStyles}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowRePassword((prev) => !prev)}
+                      edge="end"
+                      color="primary"
+                    >
+                      {showRePassword ? (
+                        <VisibilityOffIcon />
+                      ) : (
+                        <VisibilityIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              
             />
           </Box>
           <Box mx={10} my={2}>

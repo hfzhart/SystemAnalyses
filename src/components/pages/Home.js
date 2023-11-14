@@ -10,7 +10,7 @@ function Home() {
       <h1>Welcome!</h1>
       <h1>Login is success!</h1>
       </div>
-      <Footer />
+      <Footer className="Footer" />
     </div>
   );
 }

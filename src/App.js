@@ -5,6 +5,7 @@ import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import LoginForm from './components/LoginForm/LoginForm';
 import Home from './components/pages/Home';
 
+
 function App() {
 
   return (
