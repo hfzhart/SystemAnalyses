@@ -47,6 +47,7 @@ function RegistrationForm() {
   const formStyles = {
 
     fontFamily: 'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+    fontFamily: "'Syncopate', sans-serif",
   };
 
   const handleRegistration = async () => {
@@ -116,7 +117,7 @@ function RegistrationForm() {
         <Container maxWidth="sm" className='Container'>
           <Box my={2} textAlign="center">
             <Typography className="RegText" variant="h4" color="primary">
-              Реєстрація!
+              Реєстрація
             </Typography>
           </Box>
           <Box mx={2}>

@@ -1,18 +1,18 @@
 .Welcome-Title{
-    font-family:'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji';
+    font-Family: "'Nunito Sans, sans-serif'";
     text-align: center;
-    caret-color: white;
+    caret-color: #f4f1f9;
 }
 
 .titleCarret{
-    caret-color: white;
+    caret-color: #f4f1f9;
       
 }
 .loginButton{
-    caret-color: white;
+    caret-color: #f4f1f9;
 }
-.regButton{
-    caret-color: white;
+.regButton{ 
+    caret-color: #f4f1f9;
 }
 .test{
     padding-top: 20px;
