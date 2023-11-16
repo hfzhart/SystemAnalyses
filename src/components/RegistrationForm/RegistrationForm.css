@@ -7,8 +7,8 @@
   background: rgb(0, 0, 0)303;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-family: 'Syncopate', sans-serif;
+  font-family: 'Nunito Sans, sans-serif'
 }
-
 .ButtonText {
   font-family: 'Syncopate', sans-serif;
 }
@@ -17,7 +17,7 @@
 .RegText {
   text-align: center;
   padding-bottom:10px;
-  caret-color: white;
+  caret-color: #f4f1f9;
 }
 
 .maxWidth {
@@ -28,7 +28,7 @@
   width: 465px;
   height: 490px;
   padding: 50px;
-  background: #ffffff;
+  background: #f4f1f9;
   position: fixed; top: 50%; left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
