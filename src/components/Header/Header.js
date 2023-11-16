@@ -86,7 +86,7 @@ function Header() {
           ><Link to="/createchart" style={{ textDecoration: 'none', color: 'inherit' }}>
           <MenuItem onClick={handleMenuItemClick}>Створення графіків</MenuItem>
         </Link>
-            <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
+            <MenuItem onClick={handleMenuItemClick}>Головна</MenuItem>
             <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
             <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
             <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
