@@ -6,7 +6,7 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-// Добавляем middleware для проверки аутентификации перед выполнением запросов
+
 server.use((req, res, next) => {
   if (req.method !== 'GET' && !req.headers.authorization) {
     return res.status(401).json({ error: 'Unauthorized' });

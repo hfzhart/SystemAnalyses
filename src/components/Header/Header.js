@@ -1,45 +1,91 @@
-import { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {AppBar,Container,Toolbar,IconButton,Typography,Box,Button,Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions,Menu,MenuItem,} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import RegistrationForm from '../RegistrationForm/RegistrationForm';
-import LoginForm from '../LoginForm/LoginForm';
-import './Header.css';
+import { Link } from 'react-router-dom';
 
 function Header() {
-  const [open, setOpen] = useState(false);
-  const [isLoginForm, setIsLoginForm] = useState(true);
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const [openDialog, setOpenDialog] = useState(false);
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
 
   const handleClickOpen = (isLoginForm) => {
-    setOpen(true);
-    setIsLoginForm(isLoginForm); 
+    if (isLoginForm) {
+      navigate('/login');
+    } else {
+      navigate('/register');
+    }
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleOpenMenu = (event) => {
+    setMenuAnchorEl(event.currentTarget);
   };
+
+  const handleCloseMenu = () => {
+    setMenuAnchorEl(null);
+  };
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleLogout = () => {
+    handleOpenDialog();
+  };
+
+  const handleProfile = () => {
+    navigate('/home');
+  };
+
+  const handleMenuItemClick = () => {
+    handleCloseMenu();
+  };
+
+  const handleConfirmLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    navigate('/');
+    handleCloseDialog();
+  };
+
+  useEffect(() => {
+    const handleOutsideMenuClick = (event) => {
+      if (menuAnchorEl && !menuAnchorEl.contains(event.target)) {
+        handleCloseMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideMenuClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideMenuClick);
+    };
+  }, [menuAnchorEl]);
 
   return (
     <AppBar position="fixed" style={{ backgroundColor: 'white' }}>
       <Container fixed>
         <Toolbar>
-        <IconButton edge="start" color="primary" style={{ marginCenter: 'auto' }} aria-label="menu">
+          <IconButton
+            edge="start"
+            color="primary"
+            style={{ marginCenter: 'auto' }}
+            aria-label="menu"
+            onClick={handleOpenMenu}
+          >
             <MenuIcon />
           </IconButton>
           <Menu
             anchorEl={menuAnchorEl}
             open={Boolean(menuAnchorEl)}
             onClose={handleCloseMenu}
-          >
-            <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
+          ><Link to="/createchart" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <MenuItem onClick={handleMenuItemClick}>Створення графіків</MenuItem>
+        </Link>
             <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
             <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
             <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
@@ -69,7 +115,8 @@ function Header() {
                 color="primary"
                 variant="outlined"
                 style={{
-                  fontFamily: "'Comfortaa', sans-serif",
+                  fontFamily:
+                    'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
                 }}
                 onClick={handleProfile}
               >
@@ -78,7 +125,33 @@ function Header() {
             )}
           </Box>
           <Box ml={2}>
-          <Button className='regButton' color="primary" variant="contained" style={{ fontFamily: 'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji' }} onClick={() => handleClickOpen(false)}>Реєстрація</Button>
+            {isLoggedIn ? (
+              <Button
+                className="loginButton"
+                color="primary"
+                variant="outlined"
+                style={{
+                  fontFamily:
+                    'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+                }}
+                onClick={handleLogout}
+              >
+                Вийти
+              </Button>
+            ) : (
+              <Button
+                className="loginButton"
+                color="primary"
+                variant="outlined"
+                style={{
+                  fontFamily:
+                    'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+                }}
+                onClick={() => handleClickOpen(true)}
+              >
+                Вхід
+              </Button>
+            )}
           </Box>
           {!isLoggedIn && (
             <Box ml={2}>
@@ -87,8 +160,9 @@ function Header() {
                 color="primary"
                 variant="contained"
                 style={{
-                  fontFamily: "'Comfortaa', sans-serif",
-                  }}
+                  fontFamily:
+                    'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+                }}
                 onClick={() => handleClickOpen(false)}
               >
                 Реєстрація
@@ -124,12 +198,6 @@ function Header() {
           </Dialog>
         </Toolbar>
       </Container>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle className='Welcome-Title'>{isLoginForm ? '':'' }</DialogTitle>
-        <DialogContent>
-          {isLoginForm ? <LoginForm /> : <RegistrationForm />}
-        </DialogContent>
-      </Dialog>
     </AppBar>
   );
 }
