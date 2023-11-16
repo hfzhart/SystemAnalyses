@@ -1,6 +1,18 @@
-.home-container{
+start-page-container {
     position: relative;
-}
-.TextContainer{
-    margin-top: 100px;
-}
+    min-height: 100vh;
+    }
+    
+    .content-container {
+      margin-top: 100px; 
+      max-width: 100%;
+    }
+    .footer-wrapper {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    .spacer {
+      height: 100px;
+    }

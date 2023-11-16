@@ -24,4 +24,15 @@
   padding-top: 20px;
 }
 
-      
+.modal{
+  width: 465px;
+  height: 490px;
+  padding: 50px;
+  background: #ffffff;
+  position: fixed; top: 50%; left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border: 2px solid #000000;
+  border-radius: 14px;
+}

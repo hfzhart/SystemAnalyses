@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import './loginForm.css';
-import { TextField, Button, Typography } from '@mui/material';
+import { TextField, Button, Typography, Box, Alert, IconButton, InputAdornment} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import axios from 'axios';
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import { useNavigate, Link } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const theme = createTheme({
   palette: {
     primary: {
@@ -17,9 +21,35 @@ const theme = createTheme({
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const { enqueueSnackbar } = useSnackbar();
+  const handleLogin = async () => {
 
-  const handleLogin = () => {
-   
+    try {
+      const response = await axios.get('http://localhost:3001/users', {
+        params: {
+          email,
+          password,
+        },
+      });
+
+      if (response.data.length > 0) {
+        localStorage.setItem('isLoggedIn', 'true');
+        console.log(response.data);
+        enqueueSnackbar('Успішний Вхід!', { variant: 'success' });
+        setTimeout(() => {
+          navigate('/home');
+        }, 1000);
+      } else {
+        
+        setError('Невірна адреса електронної пошти або пароль. Будь ласка спробуйте ще раз.');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      setError('Під час входу сталася помилка. Будь-ласка спробуйте пізніше.');
+    }
   };
 
   return (
@@ -118,4 +148,10 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default function IntegrationNotistack() {
+  return (
+    <SnackbarProvider maxSnack={3}>
+      <LoginForm />
+    </SnackbarProvider>
+  );
+}

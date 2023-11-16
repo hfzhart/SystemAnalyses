@@ -1,14 +1,25 @@
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer/foter';
+import StartPage from './components/pages/StartPage';
+import { BrowserRouter,Routes, Route } from 'react-router-dom';
+import RegistrationForm from './components/RegistrationForm/RegistrationForm';
+import LoginForm from './components/LoginForm/LoginForm';
+import Home from './components/pages/Home';
+
 
 function App() {
 
   return (
+    <BrowserRouter>
     <div>
-      <Header />
-      <Footer /> 
+      <Routes>
+      <Route path='/' element={<StartPage/>}></Route>
+      <Route path='home' element={<Home/>}></Route>
+      <Route path='register' element={<RegistrationForm/>}></Route>
+      <Route path='login' element={<LoginForm/>}></Route>
+      </Routes>
+      
       </div>
+      </BrowserRouter>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import MyLineChart from "../Lines/MyLineChart";
 import Header from "../Header";
 import Footer from "../Footer/foter";
 import './StartPage.css'
