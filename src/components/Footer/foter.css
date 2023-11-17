@@ -27,9 +27,6 @@ body {
   display: contents;
   flex-direction: row;
   position: relative;
-
-
-  
 }
 
 .TextColor a:visited {

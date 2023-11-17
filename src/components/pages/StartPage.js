@@ -8,6 +8,7 @@ function StartPage() {
   return (
     <div className="start-page-container">
       <Header />
+     
       <div className="content-container">
         <h1>Welcome to start page!
           Тест Тест</h1>     
@@ -30,6 +31,22 @@ function StartPage() {
       <div className="">
         <MyLineChart/>   
       </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+      <div className="">
+        <MyLineChart/>   
+      </div>
+
       <div className="spacer"></div>
       <div className="footer-wrapper">
         <Footer />
