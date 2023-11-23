@@ -39,7 +39,7 @@ function Header() {
   };
 
   const handleProfile = () => {
-    navigate('/home');
+    navigate('/user');
   };
 
   const handleMenuItemClick = () => {
@@ -51,6 +51,7 @@ function Header() {
     navigate('/');
     handleCloseDialog();
   };
+  
 
   useEffect(() => {
     const handleOutsideMenuClick = (event) => {
