@@ -36,12 +36,19 @@ function LoginForm() {
       });
 
       if (response.data.length > 0) {
+        const user = response.data[0];
+        localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('isLoggedIn', 'true');
+        await axios.patch(`http://localhost:3001/users/${response.data[0].id}`, {
+          isLoggedIn: true,
+        });
         console.log(response.data);
+        
         enqueueSnackbar('Успішний Вхід!', { variant: 'success' });
         setTimeout(() => {
           navigate('/home');
         }, 1000);
+
       } else {
         
         setError('Невірна адреса електронної пошти або пароль. Будь ласка спробуйте ще раз.');

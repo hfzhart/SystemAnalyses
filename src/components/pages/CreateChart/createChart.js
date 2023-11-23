@@ -1,36 +1,11 @@
 import React, { useState } from 'react';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
-import {
-  TextField,
-  Button,
-  Box,
-  Typography,
-  Container,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Menu,
-  MenuItem,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-} from '@mui/material';
+import {LineChart,Line,XAxis,YAxis,Tooltip,Legend,ResponsiveContainer,} from 'recharts';
+import {TextField,  Button,  Box,  Typography,  Container,  AppBar,  Toolbar,  IconButton,  Menu,  MenuItem,  Dialog,  DialogTitle,  DialogContent,  DialogContentText,  DialogActions,} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
 import './createChart.css';
 
 const CreateChart = () => {
