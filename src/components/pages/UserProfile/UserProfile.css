@@ -1,4 +1,4 @@
-.ProfileCard{
+/* .ProfileCard{
     width: 440px;
   height: 390px;
   padding: 50px;
@@ -11,4 +11,7 @@
 }
 .Box{
   color: aqua;
+} */
+.spacer {
+  height: 100px;
 }
