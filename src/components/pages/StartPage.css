@@ -6,6 +6,7 @@
   .content-container {
     margin-top: 100px; 
     max-width: 100%;
+    /* font-family: 'Comfortaa', sans-serif; */
   }
   .footer-wrapper {
     position: absolute;
@@ -14,5 +15,20 @@
     right: 0;
   }
   .spacer {
+    height: 100px;
+  
+    margin-top: 100px; 
+    max-width: 100%;
+  }
+  .footer-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  spacer {
+    height: 100px;
+  }
+  .spacer2 {
     height: 100px;
   }

@@ -1,0 +1,17 @@
+/* .ProfileCard{
+    width: 440px;
+  height: 390px;
+  padding: 50px;
+  position: fixed; top: 23%; left: 15%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border: 2px solid #000000;
+  border-radius: 14px;
+}
+.Box{
+  color: aqua;
+} */
+.spacer {
+  height: 100px;
+}

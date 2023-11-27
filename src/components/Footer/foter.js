@@ -3,7 +3,9 @@ import './foter.css';
 
 function Footer() {
   const footerStyles = {
-    fontFamily: 'IBM Plex Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+
+    
+    fontFamily: "Nunito Sans, sans-serif"
 
   };
 
@@ -15,7 +17,7 @@ function Footer() {
         <ul>
           <li><a href="/privacy-policy">Політика конфіденційності</a></li>
           <li><a href="/terms-of-use">Умови використання сайту</a></li>
-          <li className='fix'><a href="/help">Допомога Користувачеві</a></li>
+          <li className='fix'><a href="/help">Допомога користувачеві</a></li>
         </ul>
         </div>
       </div>

@@ -8,6 +8,7 @@ import axios from 'axios';
 import './RegistrationForm.css';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import defaultAvatar from '../../uploads/Avatar2.png';
 import { Link } from 'react-router-dom';
 
 const theme = createTheme({
@@ -41,6 +42,7 @@ function RegistrationForm() {
   const [repassword, setRePassword] = React.useState('');
   const [validationError, setValidationError] = React.useState('');
   const navigate = useNavigate();
+  const defaultAvatarUrl = defaultAvatar;
   const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
  const [showRePassword, setShowRePassword] = useState(false);
@@ -86,6 +88,8 @@ function RegistrationForm() {
         username,
         email,
         password,
+        avatarUrl: defaultAvatarUrl,
+        isLoggedIn: true,
       });
 
       console.log(response.data);

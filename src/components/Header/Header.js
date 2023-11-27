@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {AppBar,Container,Toolbar,IconButton,Typography,Box,Button,Dialog,DialogTitle,DialogContent,DialogContentText,DialogActions,Menu,MenuItem,} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Header() {
   const navigate = useNavigate();
@@ -39,18 +40,34 @@ function Header() {
   };
 
   const handleProfile = () => {
-    navigate('/home');
+    navigate('/user');
   };
 
   const handleMenuItemClick = () => {
     handleCloseMenu();
   };
 
-  const handleConfirmLogout = () => {
-    localStorage.removeItem('isLoggedIn');
+  const handleConfirmLogout = async () => {
+    try {
+   
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      await axios.patch(`http://localhost:3001/users/${user.id}`, {
+        isLoggedIn: false,
+       
+      });
+
+      localStorage.removeItem('user');
+      localStorage.setItem('isLoggedIn', 'false');
+
+      navigate('/');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
     navigate('/');
     handleCloseDialog();
   };
+  
 
   useEffect(() => {
     const handleOutsideMenuClick = (event) => {
@@ -83,9 +100,10 @@ function Header() {
             anchorEl={menuAnchorEl}
             open={Boolean(menuAnchorEl)}
             onClose={handleCloseMenu}
-          >
-            <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
-            <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
+          ><Link to="/createchart" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <MenuItem onClick={handleMenuItemClick}>Створення графіків</MenuItem>
+        </Link>
+            <MenuItem onClick={handleMenuItemClick}>Головна</MenuItem>
             <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
             <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>
             <MenuItem onClick={handleMenuItemClick}>Пункт меню</MenuItem>

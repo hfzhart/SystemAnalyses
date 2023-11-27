@@ -2,41 +2,36 @@ const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+
+const adapter = new FileSync('db.json');
+const db = low(adapter);
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-// Добавляем middleware для проверки аутентификации перед выполнением запросов
+
 server.use((req, res, next) => {
   if (req.method !== 'GET' && !req.headers.authorization) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   next();
+  
 });
 
-server.post('/login', (req, res) => {
-  const { email, password } = req.body;
 
-  const user = db.get('users').find({ email, password }).value();
-
-  if (user) {
-    user.isLoggedIn = true;
-    return res.json({ message: 'Login successful', user });
+server.patch('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id);
+  const { isLoggedIn } = req.body;
+  const user = db.get('users').find({ id: userId });
+  if (user.value()) {
+  
+    user.assign({ isLoggedIn }).write();
+    res.status(200).json({ success: true, message: 'User updated successfully' });
   } else {
-    return res.status(401).json({ message: 'Invalid credentials' });
-  }
-});
-
-server.post('/logout', (req, res) => {
-  const { userId } = req.body;
-
-  const user = db.get('users').find({ id: userId }).value();
-
-  if (user) {
-    user.isLoggedIn = false;
-    return res.json({ message: 'Logout successful' });
-  } else {
-    return res.status(404).json({ message: 'User not found' });
+  
+    res.status(404).json({ success: false, message: 'User not found' });
   }
 });
 
