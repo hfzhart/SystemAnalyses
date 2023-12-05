@@ -29,8 +29,8 @@
       "username": "2",
       "email": "2@mail.com",
       "password": "123123",
-      "avatarUrl": "/static/media/Avatar3.0e048b524e0b6f96d785.png",
-      "isLoggedIn": false,
+      "avatarUrl": "/static/media/Avatar4.931a57ad7e5a882065af.png",
+      "isLoggedIn": true,
       "id": 2
     },
     {
@@ -50,14 +50,83 @@
       "id": 4
     }
   ],
-  "login": [
+  "charts": [
     {
-      "id": "",
-      "username": "",
-      "email": " ",
-      "password": "",
-      "avatarUrl": "",
-      "isLoggedIn": ""
+      "userId": 2,
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": 80
+        }
+      ],
+      "chartType": "line",
+      "id": 1
+    },
+    {
+      "userId": 2,
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 212
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": 80
+        }
+      ],
+      "chartType": "bar",
+      "id": 2
+    },
+    {
+      "userId": 2,
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": 80
+        }
+      ],
+      "chartType": "pie",
+      "id": 3
     }
   ]
 }
