@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {Typography,Avatar,Menu,MenuItem,Grid,CardContent,CardActions,Box, Drawer, List, ListItem, ListItemText, CssBaseline, IconButton,} from '@mui/material';
-import { useNavigate, Link, Outlet } from 'react-router-dom';
+import {Typography,Avatar,Menu,MenuItem,Grid,CardActions,Box, List, ListItem, ListItemText, CssBaseline, IconButton,} from '@mui/material';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import MenuIcon from '@mui/icons-material/Menu';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import Divider from '@mui/material/Divider';
 import SaveIcon from '@mui/icons-material/Save';
 import avatar1 from '../../../uploads/Avatar1.png';
@@ -16,6 +14,12 @@ import avatar3 from '../../../uploads/Avatar3.png';
 import avatar4 from '../../../uploads/Avatar4.png';
 import avatar5 from '../../../uploads/Avatar5.png';
 import avatar6 from '../../../uploads/Avatar6.png';
+import Dashboard from '../../Lines/Dashboard';
+import HomeIcon from '@mui/icons-material/Home';
+import Tooltip from '@mui/material/Tooltip';
+import PersonIcon from '@mui/icons-material/Person';
+import AddchartIcon from '@mui/icons-material/Addchart';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import './UserProfile.css';
 
 const UserProfile = () => {
@@ -28,15 +32,15 @@ const UserProfile = () => {
     avatarUrl: '',
   });
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [previewAvatar, setPreviewAvatar] = useState(user.avatarUrl || null);
+  const [isDashboardVisible, setIsDashboardVisible] = useState(false);
 
   const fetchUserData = async () => {
     try {
       const storedUser = localStorage.getItem('user');
       const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-  
+
       if (storedUser && isLoggedIn) {
         const user = JSON.parse(storedUser);
         const response = await axios.get(`http://localhost:3001/users/${user.id}`);
@@ -58,12 +62,12 @@ const UserProfile = () => {
   useEffect(() => {
     fetchUserData();
   }, []);
-  
+
   useEffect(() => {
     console.log('user.avatarUrl changed:', user.avatarUrl);
     setPreviewAvatar(user.avatarUrl || null);
   }, [user.avatarUrl]);
-  
+
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -108,60 +112,42 @@ const UserProfile = () => {
     }
   };
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
-
-
   return (
-    <div className={`ProfileCard ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
+    <div className="ProfileCard">
       <CssBaseline />
 
-      <Box display="flex">
-
-       
-        <Drawer
-          variant="persistent"
-          anchor="left"
-          open={isSidebarOpen}
-          sx={{ 
-            zIndex: 1200,
-            '& .MuiPaper-root': {
-              backgroundColor: '#F1F4F9', 
-            },
+      <Box display="flex" sx={{ height: '100vh' }}>
+        <Box
+          sx={{
+            width: '300px',
+            flexShrink: 0,
+            bgcolor: '#F1F4F9',
+            padding: '16px',
+            borderRight: '1px solid #ccc',
+            position: 'fixed', 
+            top: 0, 
+            bottom: 0, 
+            overflowY: 'auto', 
           }}
         >
-          <CardContent>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography variant="h6">{user.username}</Typography>
-                <Typography variant="body2">{user.email}</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Avatar alt="User Avatar" src={previewAvatar} sx={{ width: 150, height: 150, margin: '15px' }} />
-              </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="h6">{user.username}</Typography>
+              <Typography variant="body2">{user.email}</Typography>
             </Grid>
-          </CardContent>
-          <IconButton
-            color="inherit"
-            aria-label="close sidebar"
-            onClick={toggleSidebar}
-            sx={{
-              position: 'absolute',
-              top: 10,
-              right: 10,
-              fontSize: 30,
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
+            <Grid item xs={12}>
+              <Avatar alt="User Avatar" src={previewAvatar} sx={{ width: 150, height: 150, margin: '15px' }} />
+            </Grid>
+          </Grid>
+          <Divider />
           <CardActions>
+          <Tooltip title="Змінити автарку" arrow>
             <IconButton onClick={handleMenuOpen}>
-              <SettingsIcon />
+              <PersonIcon />
             </IconButton>
+            </Tooltip>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose} PaperProps={{ style: { width: '450px' } }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap',padding: '16px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', padding: '16px' }}>
                 {avatars.map((avatar, index) => (
                   <MenuItem key={index} onClick={() => handleAvatarChange(avatar)}>
                     <Avatar alt={`Аватар ${index + 1}`} src={avatar} sx={{ width: '100px', height: '100px', marginRight: '5px' }} />
@@ -169,49 +155,47 @@ const UserProfile = () => {
                 ))}
               </div>
             </Menu>
-            <IconButton onClick={handleLogout}>
-              <ExitToAppIcon/>
-            </IconButton>
             <IconButton onClick={handleSaveAvatar}>
+            <Tooltip title="Зберегти зміни" arrow>
               <SaveIcon />
+              </Tooltip>
+              </IconButton>
+            <Tooltip title="Вихід" arrow>
+            <IconButton onClick={handleLogout}>
+              <ExitToAppIcon />
             </IconButton>
+            </Tooltip>
           </CardActions>
+          <Divider />
           <List>
-            {['Dashboard 1', 'Dashboard 2', 'Dashboard 3'].map((text, index) => (
-              <div key={text}>
-                <ListItem button component={Link} to={`/dashboard/${index + 1}`} onClick={toggleSidebar}>
-                    <DashboardIcon />
-                  <ListItemText primary={text} />
-                </ListItem>
-                {index !== 2 && <Divider />} 
-              </div>
-            ))}
+            <ListItem button component={Link} to="/">
+              <HomeIcon />
+              <ListItemText primary="Головна" />
+            </ListItem>
+            <Divider />
+            <ListItem button onClick={() => setIsDashboardVisible(true)}>
+              <BarChartIcon />
+              <ListItemText primary="Збережені графіки" />
+            </ListItem>
+            <Divider />
+            <ListItem button component={Link} to="/createchart">
+              <AddchartIcon />
+              <ListItemText primary="Створити графік" />
+            </ListItem>
+            <Divider />
+            <ListItem button component={Link} to="/usersettings">
+              <SettingsIcon />
+              <ListItemText primary="Налаштування" />
+            </ListItem>
           </List>
           <Divider />
-        </Drawer>
-
-        
-        <IconButton
-          color="inherit"
-          aria-label="open sidebar"
-          onClick={toggleSidebar}
-          sx={{
-            fontSize: 40,
-          }}
-        >
-          <MenuIcon />
-        </IconButton>
-
-       
-        <Box ml={isSidebarOpen ? 300 : 0} p={2}>
-          <Outlet />
         </Box>
 
+        <Box sx={{ flexGrow: 1, p: 3, marginLeft: '300px' }}>
+          {isDashboardVisible && <Dashboard />}
+        </Box>
       </Box>
-
-      
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-
     </div>
   );
 };

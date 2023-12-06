@@ -122,7 +122,7 @@ function StartPage() {
       <Divider variant="middle" sx={{ my: '20px', borderColor: '#EAEAEA' }} />
 
      
-      <animated.div style={chartAnimationProps}> й
+      <animated.div style={chartAnimationProps}> 
         <Box sx={{ display: 'flex', flexDirection: 'row', marginTop: '20px' }}>
           <Box sx={{ flex: 1, marginLeft: '20px' }}>
             <PieChartComponent />
