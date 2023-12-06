@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import Divider from '@mui/material/Divider';
 import SaveIcon from '@mui/icons-material/Save';
 import avatar1 from '../../../uploads/Avatar1.png';
@@ -16,6 +15,11 @@ import avatar4 from '../../../uploads/Avatar4.png';
 import avatar5 from '../../../uploads/Avatar5.png';
 import avatar6 from '../../../uploads/Avatar6.png';
 import Dashboard from '../../Lines/Dashboard';
+import HomeIcon from '@mui/icons-material/Home';
+import Tooltip from '@mui/material/Tooltip';
+import PersonIcon from '@mui/icons-material/Person';
+import AddchartIcon from '@mui/icons-material/Addchart';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import './UserProfile.css';
 
 const UserProfile = () => {
@@ -30,6 +34,7 @@ const UserProfile = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [previewAvatar, setPreviewAvatar] = useState(user.avatarUrl || null);
+  const [isDashboardVisible, setIsDashboardVisible] = useState(false);
 
   const fetchUserData = async () => {
     try {
@@ -111,7 +116,7 @@ const UserProfile = () => {
     <div className="ProfileCard">
       <CssBaseline />
 
-      <Box display="flex" sx={{ width: '100%' }}>
+      <Box display="flex" sx={{ height: '100vh' }}>
         <Box
           sx={{
             width: '300px',
@@ -119,6 +124,10 @@ const UserProfile = () => {
             bgcolor: '#F1F4F9',
             padding: '16px',
             borderRight: '1px solid #ccc',
+            position: 'fixed', 
+            top: 0, 
+            bottom: 0, 
+            overflowY: 'auto', 
           }}
         >
           <Grid container spacing={2}>
@@ -132,9 +141,11 @@ const UserProfile = () => {
           </Grid>
           <Divider />
           <CardActions>
+          <Tooltip title="Змінити автарку" arrow>
             <IconButton onClick={handleMenuOpen}>
-              <SettingsIcon />
+              <PersonIcon />
             </IconButton>
+            </Tooltip>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose} PaperProps={{ style: { width: '450px' } }}>
               <div style={{ display: 'flex', flexWrap: 'wrap', padding: '16px' }}>
                 {avatars.map((avatar, index) => (
@@ -144,37 +155,44 @@ const UserProfile = () => {
                 ))}
               </div>
             </Menu>
+            <IconButton onClick={handleSaveAvatar}>
+            <Tooltip title="Зберегти зміни" arrow>
+              <SaveIcon />
+              </Tooltip>
+              </IconButton>
+            <Tooltip title="Вихід" arrow>
             <IconButton onClick={handleLogout}>
               <ExitToAppIcon />
             </IconButton>
-            <IconButton onClick={handleSaveAvatar}>
-              <SaveIcon />
-            </IconButton>
+            </Tooltip>
           </CardActions>
           <Divider />
           <List>
-            {['Dashboard 1', 'Dashboard 2', 'Dashboard 3'].map((text, index) => (
-              <div key={text}>
-                {index === 0 ? ( 
-                  <ListItem button component={Link} to={`/dashboard/${index + 1}`}>
-                    <DashboardIcon />
-                    <ListItemText primary="Збережені графіки" /> 
-                  </ListItem>
-                ) : (
-                  <ListItem button component={Link} to={`/dashboard/${index + 1}`}>
-                    <DashboardIcon />
-                    <ListItemText primary={text} />
-                  </ListItem>
-                )}
-                {index !== 2 && <Divider />}
-              </div>
-            ))}
+            <ListItem button component={Link} to="/">
+              <HomeIcon />
+              <ListItemText primary="Головна" />
+            </ListItem>
+            <Divider />
+            <ListItem button onClick={() => setIsDashboardVisible(true)}>
+              <BarChartIcon />
+              <ListItemText primary="Збережені графіки" />
+            </ListItem>
+            <Divider />
+            <ListItem button component={Link} to="/createchart">
+              <AddchartIcon />
+              <ListItemText primary="Створити графік" />
+            </ListItem>
+            <Divider />
+            <ListItem button component={Link} to="/usersettings">
+              <SettingsIcon />
+              <ListItemText primary="Налаштування" />
+            </ListItem>
           </List>
           <Divider />
         </Box>
 
-        <Box sx={{ flexGrow: 1, p: 3 }}>
-          <Dashboard />
+        <Box sx={{ flexGrow: 1, p: 3, marginLeft: '300px' }}>
+          {isDashboardVisible && <Dashboard />}
         </Box>
       </Box>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />

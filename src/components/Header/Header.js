@@ -40,7 +40,7 @@ function Header() {
   };
 
   const handleProfile = () => {
-    navigate('/user');
+    navigate('/profile');
   };
 
   const handleMenuItemClick = () => {

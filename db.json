@@ -52,7 +52,78 @@
   ],
   "charts": [
     {
-      "userId": 2,
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": "54"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": "31"
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": "88"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "кываы",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        }
+      ],
+      "id": 4
+    },
+    {
+      "userId": 3,
       "chartData": [
         {
           "name": "Data1",
@@ -76,14 +147,16 @@
         }
       ],
       "chartType": "line",
-      "id": 1
+      "chartName": "312",
+      "saveDate": "2023-12-06T19:55:16.023Z",
+      "id": 5
     },
     {
-      "userId": 2,
+      "userId": 3,
       "chartData": [
         {
           "name": "Data1",
-          "value": 212
+          "value": 20
         },
         {
           "name": "Data2",
@@ -102,11 +175,13 @@
           "value": 80
         }
       ],
-      "chartType": "bar",
-      "id": 2
+      "chartType": "line",
+      "chartName": "п",
+      "saveDate": "2023-12-06T19:56:28.122Z",
+      "id": 6
     },
     {
-      "userId": 2,
+      "userId": 3,
       "chartData": [
         {
           "name": "Data1",
@@ -117,6 +192,10 @@
           "value": 45
         },
         {
+          "name": "Data3",
+          "value": 60
+        },
+        {
           "name": "Data4",
           "value": 30
         },
@@ -125,8 +204,68 @@
           "value": 80
         }
       ],
-      "chartType": "pie",
-      "id": 3
+      "chartType": "line",
+      "chartName": "ы",
+      "saveDate": "2023-12-06T19:56:30.582Z",
+      "id": 7
+    },
+    {
+      "userId": 3,
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": 80
+        }
+      ],
+      "chartType": "line",
+      "chartName": "ы",
+      "saveDate": "2023-12-06T19:56:32.310Z",
+      "id": 8
+    },
+    {
+      "userId": 3,
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": 80
+        }
+      ],
+      "chartType": "line",
+      "chartName": "ы",
+      "saveDate": "2023-12-06T19:56:34.235Z",
+      "id": 9
     }
   ]
 }

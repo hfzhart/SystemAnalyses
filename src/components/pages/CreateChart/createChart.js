@@ -16,6 +16,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 import './createChart.css';
 
@@ -36,6 +37,11 @@ const CreateChart = () => {
   const [editedDataValue, setEditedDataValue] = useState('');
   const [selectedDataIndex, setSelectedDataIndex] = useState(null);
   const [selectedChartType, setSelectedChartType] = useState('line');
+  const [openSaveDialog, setOpenSaveDialog] = useState(false);
+  const [chartName, setChartName] = useState('');
+  // eslint-disable-next-line
+  const [saveDate, setSaveDate] = useState(null);
+
 
   const handleAddData = () => {
     if (dataPoint && dataName) {
@@ -93,6 +99,13 @@ const CreateChart = () => {
   };
 
   const handleSaveChart = async () => {
+    
+    if (!chartName) {
+      toast.error('Введіть назву графіка.');
+      setOpenSaveDialog(true);
+      return;
+    }
+
     try {
       const user = JSON.parse(localStorage.getItem('user'));
 
@@ -100,16 +113,20 @@ const CreateChart = () => {
         toast.error('Не удалось определить пользователя.');
         return;
       }
-
+      const currentDate = new Date();
+      
       const response = await axios.post('http://localhost:3001/charts', {
         userId: user.id,
         chartData,
         chartType: selectedChartType,
+        chartName,
+        saveDate: currentDate.toISOString(),
       });
-
       const savedChart = response.data;
+      setSaveDate(new Date());
       toast.success('Графік успішно збережений!');
       console.log('Saved Chart:', savedChart);
+      setOpenSaveDialog(false)
     } catch (error) {
       console.error('Error saving chart:', error);
       toast.error('Помилка при збереженні графіку.');
@@ -142,7 +159,7 @@ const CreateChart = () => {
             open={Boolean(menuAnchorEl)}
             onClose={handleCloseMenu}
           >
-            <MenuItem onClick={handleCloseMenu}>Панель приладів</MenuItem>
+            <MenuItem component={Link} to="/profile">Профіль користувача</MenuItem>
             <MenuItem onClick={handleCloseMenu}>Налаштування</MenuItem>
             <MenuItem onClick={handleCloseMenu}>Допомога</MenuItem>
           </Menu>
@@ -318,16 +335,44 @@ const CreateChart = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Box mt={3}>
+      <Box mt={3} className ="SaveButton">
         <Button
           variant="contained"
           color="primary"
-          onClick={handleSaveChart}
+          onClick={() => setOpenSaveDialog(true)}
           startIcon={<SaveIcon />}
         >
           Зберегти графік
         </Button>
       </Box>
+
+ 
+      <Dialog open={openSaveDialog} onClose={() => setOpenSaveDialog(false)}maxWidth="md">
+        <DialogTitle>Введіть назву графіка</DialogTitle>
+        <DialogContent>
+          <Box>
+          <TextField
+            autoFocus
+            label="Назва графіка"
+            variant="outlined"
+            fullWidth
+            value={chartName}
+            onChange={(e) => setChartName(e.target.value)}
+            sx={{ marginTop: '8px'}}
+              
+          />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenSaveDialog(false)} color="primary">
+            Відміна
+          </Button>
+          <Button onClick={handleSaveChart} color="primary">
+            Зберегти
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );
 };
