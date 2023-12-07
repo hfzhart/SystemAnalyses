@@ -26,19 +26,10 @@
       "id": 1
     },
     {
-      "username": "2",
-      "email": "2@mail.com",
+      "username": "Den-Pen",
+      "email": "34@mail.com",
       "password": "123123",
-      "avatarUrl": "/static/media/Avatar4.931a57ad7e5a882065af.png",
-      "isLoggedIn": true,
-      "id": 2
-    },
-    {
-      "username": "3333333",
-      "email": "3@mail.com",
-      "password": "123123",
-      "avatarUrl": "/static/media/Avatar2.4066e974da1691330dd3.png",
-      "isLoggedIn": false,
+      "avatarUrl": "/static/media/Avatar6.4e6bc07a77dc3ed51b43.png",
       "id": 3
     },
     {
@@ -46,12 +37,13 @@
       "email": "4@mail.com",
       "password": "123123",
       "avatarUrl": "/static/media/Avatar2.4066e974da1691330dd3.png",
-      "isLoggedIn": true,
+      "isLoggedIn": false,
       "id": 4
     }
   ],
   "charts": [
     {
+      "userId": 3,
       "chartData": [
         {
           "name": "Data1",
@@ -71,56 +63,13 @@
         },
         {
           "name": "Data5",
-          "value": "54"
+          "value": 80
         }
       ],
-      "id": 1
-    },
-    {
-      "chartData": [
-        {
-          "name": "Data1",
-          "value": "31"
-        },
-        {
-          "name": "Data2",
-          "value": 45
-        },
-        {
-          "name": "Data3",
-          "value": 60
-        },
-        {
-          "name": "Data4",
-          "value": 30
-        },
-        {
-          "name": "Data5",
-          "value": "88"
-        }
-      ],
-      "id": 3
-    },
-    {
-      "chartData": [
-        {
-          "name": "Data1",
-          "value": 20
-        },
-        {
-          "name": "кываы",
-          "value": 45
-        },
-        {
-          "name": "Data3",
-          "value": 60
-        },
-        {
-          "name": "Data4",
-          "value": 30
-        }
-      ],
-      "id": 4
+      "chartType": "line",
+      "chartName": "A",
+      "saveDate": "2023-12-05T15:29:37.915Z",
+      "id": 11
     },
     {
       "userId": 3,
@@ -147,9 +96,9 @@
         }
       ],
       "chartType": "line",
-      "chartName": "312",
-      "saveDate": "2023-12-06T19:55:16.023Z",
-      "id": 5
+      "chartName": "B",
+      "saveDate": "2023-12-07T15:29:40.375Z",
+      "id": 12
     },
     {
       "userId": 3,
@@ -176,9 +125,9 @@
         }
       ],
       "chartType": "line",
-      "chartName": "п",
-      "saveDate": "2023-12-06T19:56:28.122Z",
-      "id": 6
+      "chartName": "D",
+      "saveDate": "2023-12-07T15:34:08.371Z",
+      "id": 13
     },
     {
       "userId": 3,
@@ -188,7 +137,49 @@
           "value": 20
         },
         {
-          "name": "Data2",
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": 80
+        }
+      ],
+      "chartType": "line",
+      "chartName": "C",
+      "saveDate": "2023-12-07T15:34:13.269Z",
+      "id": 14
+    },
+    {
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": "2"
+        }
+      ],
+      "id": 15
+    },
+    {
+      "userId": 3,
+      "chartData": [
+        {
+          "name": "A",
+          "value": 20
+        },
+        {
+          "name": "B",
           "value": 45
         },
         {
@@ -205,67 +196,9 @@
         }
       ],
       "chartType": "line",
-      "chartName": "ы",
-      "saveDate": "2023-12-06T19:56:30.582Z",
-      "id": 7
-    },
-    {
-      "userId": 3,
-      "chartData": [
-        {
-          "name": "Data1",
-          "value": 20
-        },
-        {
-          "name": "Data2",
-          "value": 45
-        },
-        {
-          "name": "Data3",
-          "value": 60
-        },
-        {
-          "name": "Data4",
-          "value": 30
-        },
-        {
-          "name": "Data5",
-          "value": 80
-        }
-      ],
-      "chartType": "line",
-      "chartName": "ы",
-      "saveDate": "2023-12-06T19:56:32.310Z",
-      "id": 8
-    },
-    {
-      "userId": 3,
-      "chartData": [
-        {
-          "name": "Data1",
-          "value": 20
-        },
-        {
-          "name": "Data2",
-          "value": 45
-        },
-        {
-          "name": "Data3",
-          "value": 60
-        },
-        {
-          "name": "Data4",
-          "value": 30
-        },
-        {
-          "name": "Data5",
-          "value": 80
-        }
-      ],
-      "chartType": "line",
-      "chartName": "ы",
-      "saveDate": "2023-12-06T19:56:34.235Z",
-      "id": 9
+      "chartName": "F",
+      "saveDate": "2023-12-07T15:35:25.813Z",
+      "id": 16
     }
   ]
 }

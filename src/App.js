@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm/LoginForm';
 import Home from './components/pages/Home';
 import CreateChart from './components/pages/CreateChart/createChart';
 import UserProfile from './components/pages/UserProfile/UserProfile';
+import UserSettingsForm from './components/pages/usersettings';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Route path='register' element={<RegistrationForm/>}></Route>
       <Route path='login' element={<LoginForm/>}></Route>
       <Route path='createchart' element={<CreateChart/>}></Route>
+      <Route path='usersettings' element={<UserSettingsForm/>}></Route>
       </Routes>
       </BrowserRouter>
   );

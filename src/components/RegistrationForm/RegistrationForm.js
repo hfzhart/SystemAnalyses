@@ -61,22 +61,22 @@ function RegistrationForm() {
       return;
     }
 
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailRegex.test(email)) {
-      setValidationError('Невірна адреса електронної пошти. Використовуйте лише англійські літери.');
-      return;
-    }
-  // eslint-disable-next-line
-    const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]+$/;
-    if (!passwordRegex.test(password)) {
-      setValidationError('Недійсний пароль. Використовуйте лише англійські літери та цифри.');
-      return;
-    }
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if (!emailRegex.test(email)) {
+        setValidationError('Невірна адреса електронної пошти. Використовуйте лише англійські літери.');
+        return;
+      }
+    // eslint-disable-next-line
+      const passwordRegex = /^[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]+$/;
+      if (!passwordRegex.test(password)) {
+        setValidationError('Недійсний пароль. Використовуйте лише англійські літери та цифри.');
+        return;
+      }
 
-    if (password.length < 6) {
-      setValidationError('Пароль має бути не менше 6 символів.');
-      return;
-    }
+      if (password.length < 6) {
+        setValidationError('Пароль має бути не менше 6 символів.');
+        return;
+      }
 
     if (password !== repassword) {
       setValidationError('Паролі не збігаються.');

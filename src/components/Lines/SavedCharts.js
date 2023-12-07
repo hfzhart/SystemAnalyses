@@ -95,16 +95,17 @@ const SavedCharts = ({ userId }) => {
           value={selectedChartType}
           label="Тип графіка"
           onChange={(e) => setSelectedChartType(e.target.value)}
+          sx={{ marginRight: '8px'}}
         >
           <MenuItem value="bar">Стовпчатий</MenuItem>
           <MenuItem value="pie">Круговий</MenuItem>
           <MenuItem value="line">Лінійний</MenuItem>
         </Select>
       </FormControl>
-
       <TextField
         label="Пошук за назвою"
         value={searchTerm}
+        sx={{ marginRight: '8px'}}
         onChange={(e) => setSearchTerm(e.target.value)}
         InputProps={{
           endAdornment: (
@@ -114,6 +115,7 @@ const SavedCharts = ({ userId }) => {
           ),
         }}
       />
+      
 
       <DatePicker
         selected={selectedDate}
@@ -122,7 +124,6 @@ const SavedCharts = ({ userId }) => {
         dateFormat="yyyy/MM/dd"
         isClearable
       />
-
       <Paper>
         <List>
           {filteredCharts.map((chart, index) => (

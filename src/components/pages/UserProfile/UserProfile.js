@@ -30,6 +30,7 @@ const UserProfile = () => {
     username: 'Guest',
     email: '',
     avatarUrl: '',
+    password: '',
   });
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
@@ -52,6 +53,7 @@ const UserProfile = () => {
           username: 'Guest',
           email: '',
           avatarUrl: '',
+          password: '',
         });
       }
     } catch (error) {
@@ -134,6 +136,7 @@ const UserProfile = () => {
             <Grid item xs={12}>
               <Typography variant="h6">{user.username}</Typography>
               <Typography variant="body2">{user.email}</Typography>
+              
             </Grid>
             <Grid item xs={12}>
               <Avatar alt="User Avatar" src={previewAvatar} sx={{ width: 150, height: 150, margin: '15px' }} />
