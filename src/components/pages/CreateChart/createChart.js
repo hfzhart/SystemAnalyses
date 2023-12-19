@@ -39,8 +39,10 @@ const CreateChart = () => {
   const [selectedChartType, setSelectedChartType] = useState('line');
   const [openSaveDialog, setOpenSaveDialog] = useState(false);
   const [chartName, setChartName] = useState('');
+
   // eslint-disable-next-line
   const [saveDate, setSaveDate] = useState(null);
+  
 
 
   const handleAddData = () => {
@@ -110,7 +112,7 @@ const CreateChart = () => {
       const user = JSON.parse(localStorage.getItem('user'));
 
       if (!user || !user.id) {
-        toast.error('Не удалось определить пользователя.');
+        toast.error('Не вдалося визначити користувача.');
         return;
       }
       const currentDate = new Date();
@@ -167,6 +169,7 @@ const CreateChart = () => {
       </AppBar>
       <Container maxWidth="md">
         <Box mt={3}>
+          
           <Typography variant="h4" gutterBottom>
             Додати дані до графіку
           </Typography>
@@ -179,6 +182,7 @@ const CreateChart = () => {
               onChange={(e) => setDataName(e.target.value)}
               sx={{ marginRight: '8px' }}
             />
+
             <TextField
               label="Data Point"
               variant="outlined"
@@ -187,6 +191,7 @@ const CreateChart = () => {
               onChange={(e) => setDataPoint(e.target.value)}
               sx={{ marginRight: '8px' }}
             />
+            
             <Button
               variant="contained"
               color="primary"
@@ -236,7 +241,7 @@ const CreateChart = () => {
         </Box>
         
         )}
-        </Box>
+      
        
       
       
@@ -288,17 +293,30 @@ const CreateChart = () => {
                   Видалити
                 </Button>
               </Box>
+              
             )}
           </Box>
         </Box>
-      </Container>
-
-      <Dialog
+        </Box>
+       
+        <Box mt={3} className="SaveButton" style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '-150px' }}>
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={() => setOpenSaveDialog(true)}
+    startIcon={<SaveIcon />}
+  >
+    Зберегти графік
+  </Button>
+</Box>
+    </Container>
+      <Dialog 
         open={openEditDialog}
         onClose={handleCloseEditDialog}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">Редагувати дані</DialogTitle>
+       
         <DialogContent>
           <DialogContentText>
             Введіть нові значення для даних.
@@ -322,6 +340,7 @@ const CreateChart = () => {
             value={editedDataValue}
             onChange={(e) => setEditedDataValue(e.target.value)}
           />
+          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseEditDialog} color="primary">
@@ -335,16 +354,7 @@ const CreateChart = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Box mt={3} className ="SaveButton">
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => setOpenSaveDialog(true)}
-          startIcon={<SaveIcon />}
-        >
-          Зберегти графік
-        </Button>
-      </Box>
+    
 
  
       <Dialog open={openSaveDialog} onClose={() => setOpenSaveDialog(false)}maxWidth="md">
@@ -372,7 +382,9 @@ const CreateChart = () => {
           </Button>
         </DialogActions>
       </Dialog>
+    
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+      
     </div>
   );
 };

@@ -26,10 +26,10 @@
       "id": 1
     },
     {
-      "username": "Den-Pen",
+      "username": "user",
       "email": "34@mail.com",
       "password": "123123",
-      "avatarUrl": "/static/media/Avatar6.4e6bc07a77dc3ed51b43.png",
+      "avatarUrl": "/static/media/Avatar4.931a57ad7e5a882065af.png",
       "id": 3
     },
     {
@@ -43,11 +43,14 @@
   ],
   "charts": [
     {
-      "userId": 3,
       "chartData": [
         {
           "name": "Data1",
           "value": 20
+        },
+        {
+          "name": "Data4",
+          "value": 30
         },
         {
           "name": "Data2",
@@ -58,17 +61,10 @@
           "value": 60
         },
         {
-          "name": "Data4",
-          "value": 30
-        },
-        {
           "name": "Data5",
           "value": 80
         }
       ],
-      "chartType": "line",
-      "chartName": "A",
-      "saveDate": "2023-12-05T15:29:37.915Z",
       "id": 11
     },
     {
@@ -172,7 +168,6 @@
       "id": 15
     },
     {
-      "userId": 3,
       "chartData": [
         {
           "name": "A",
@@ -195,10 +190,91 @@
           "value": 80
         }
       ],
-      "chartType": "line",
-      "chartName": "F",
-      "saveDate": "2023-12-07T15:35:25.813Z",
       "id": 16
+    },
+    {
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": 80
+        }
+      ],
+      "id": 18
+    },
+    {
+      "userId": 3,
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": 80
+        }
+      ],
+      "chartType": "bar",
+      "chartName": "ыв",
+      "saveDate": "2023-12-18T16:10:27.667Z",
+      "id": 19
+    },
+    {
+      "userId": 3,
+      "chartData": [
+        {
+          "name": "Data1",
+          "value": 20
+        },
+        {
+          "name": "Data2",
+          "value": 45
+        },
+        {
+          "name": "Data3",
+          "value": 60
+        },
+        {
+          "name": "Data4",
+          "value": 30
+        },
+        {
+          "name": "Data5",
+          "value": 80
+        }
+      ],
+      "chartType": "pie",
+      "chartName": "4@mail.com",
+      "saveDate": "2023-12-18T16:34:39.728Z",
+      "id": 20
     }
   ]
+ 
 }

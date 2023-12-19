@@ -20,7 +20,9 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonIcon from '@mui/icons-material/Person';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import TableRowsIcon from '@mui/icons-material/TableRows';
 import './UserProfile.css';
+import TableCreate from '../tableCreate';
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -36,6 +38,11 @@ const UserProfile = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [previewAvatar, setPreviewAvatar] = useState(user.avatarUrl || null);
   const [isDashboardVisible, setIsDashboardVisible] = useState(false);
+  const [isTableCreateVisible, setIsTableCreateVisible] = useState(false);
+
+  const handleOpenTableCreate = () => {
+    setIsTableCreateVisible(true);
+  };
 
   const fetchUserData = async () => {
     try {
@@ -186,6 +193,11 @@ const UserProfile = () => {
               <ListItemText primary="Створити графік" />
             </ListItem>
             <Divider />
+            <ListItem button onClick={handleOpenTableCreate}>
+              <TableRowsIcon />
+              <ListItemText primary="Таблиці" />
+            </ListItem>
+            <Divider />
             <ListItem button component={Link} to="/usersettings">
               <SettingsIcon />
               <ListItemText primary="Налаштування" />
@@ -196,6 +208,7 @@ const UserProfile = () => {
 
         <Box sx={{ flexGrow: 1, p: 3, marginLeft: '300px' }}>
           {isDashboardVisible && <Dashboard />}
+          {isTableCreateVisible && <TableCreate />}
         </Box>
       </Box>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />

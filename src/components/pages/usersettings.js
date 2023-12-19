@@ -80,13 +80,13 @@ const UserSettings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Перевірка старого пароля
+
       if (newData.oldPassword !== user.password) {
         setPasswordError('Старий пароль введений невірно');
         return;
       }
 
-      // Перевірка електронної пошти
+   
       if (newData.newEmail && !validateEmail(newData.newEmail)) {
         setEmailError('Невірний формат адреси електронної пошти. Використовуйте тільки англійські літери.');
         return;
