@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import {Typography,Avatar,Menu,MenuItem,Grid,CardActions,Box, List, ListItem, ListItemText, CssBaseline, IconButton,} from '@mui/material';
+import {
+  Typography,
+  Avatar,
+  Menu,
+  MenuItem,
+  Grid,
+  CardActions,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  CssBaseline,
+  IconButton,
+  Divider,
+  Tooltip,
+} from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import Divider from '@mui/material/Divider';
 import SaveIcon from '@mui/icons-material/Save';
 import avatar1 from '../../../uploads/Avatar1.png';
 import avatar2 from '../../../uploads/Avatar2.png';
@@ -16,13 +30,13 @@ import avatar5 from '../../../uploads/Avatar5.png';
 import avatar6 from '../../../uploads/Avatar6.png';
 import Dashboard from '../../Lines/Dashboard';
 import HomeIcon from '@mui/icons-material/Home';
-import Tooltip from '@mui/material/Tooltip';
 import PersonIcon from '@mui/icons-material/Person';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import './UserProfile.css';
 import TableCreate from '../tableCreate';
+import ExportTable from '../exporttable';
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -39,9 +53,24 @@ const UserProfile = () => {
   const [previewAvatar, setPreviewAvatar] = useState(user.avatarUrl || null);
   const [isDashboardVisible, setIsDashboardVisible] = useState(false);
   const [isTableCreateVisible, setIsTableCreateVisible] = useState(false);
+  const [isTableExportVisible, setIsTableExportVisible] = useState(false);
+
+  const handleOpenDashboard = () => {
+    setIsDashboardVisible(true);
+    setIsTableCreateVisible(false);
+    setIsTableExportVisible(false);
+  };
 
   const handleOpenTableCreate = () => {
+    setIsDashboardVisible(false);
     setIsTableCreateVisible(true);
+    setIsTableExportVisible(false);
+  };
+
+  const handleOpenTableExport = () => {
+    setIsDashboardVisible(false);
+    setIsTableCreateVisible(false);
+    setIsTableExportVisible(true);
   };
 
   const fetchUserData = async () => {
@@ -123,95 +152,101 @@ const UserProfile = () => {
 
   return (
     <div className="ProfileCard">
-      <CssBaseline />
+      <div className="AppGlass">
+        <CssBaseline />
 
-      <Box display="flex" sx={{ height: '100vh' }}>
-        <Box
-          sx={{
-            width: '300px',
-            flexShrink: 0,
-            bgcolor: '#F1F4F9',
-            padding: '16px',
-            borderRight: '1px solid #ccc',
-            position: 'fixed', 
-            top: 0, 
-            bottom: 0, 
-            overflowY: 'auto', 
-          }}
-        >
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography variant="h6">{user.username}</Typography>
-              <Typography variant="body2">{user.email}</Typography>
-              
+        <Box display="flex" sx={{ height: '100vh' }}>
+          <Box
+            sx={{
+              width: '300px',
+              flexShrink: 0,
+              bgcolor: '#F1F4F9',
+              padding: '16px',
+              borderRight: '1px solid #ccc',
+              position: 'fixed',
+              top: 0,
+              bottom: 0,
+              overflowY: 'auto',
+            }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h6">{user.username}</Typography>
+                <Typography variant="body2">{user.email}</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Avatar alt="User Avatar" src={previewAvatar} sx={{ width: 150, height: 150, margin: '15px' }} />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Avatar alt="User Avatar" src={previewAvatar} sx={{ width: 150, height: 150, margin: '15px' }} />
-            </Grid>
-          </Grid>
-          <Divider />
-          <CardActions>
-          <Tooltip title="Змінити автарку" arrow>
-            <IconButton onClick={handleMenuOpen}>
-              <PersonIcon />
-            </IconButton>
-            </Tooltip>
-            <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose} PaperProps={{ style: { width: '450px' } }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', padding: '16px' }}>
-                {avatars.map((avatar, index) => (
-                  <MenuItem key={index} onClick={() => handleAvatarChange(avatar)}>
-                    <Avatar alt={`Аватар ${index + 1}`} src={avatar} sx={{ width: '100px', height: '100px', marginRight: '5px' }} />
-                  </MenuItem>
-                ))}
-              </div>
-            </Menu>
-            <IconButton onClick={handleSaveAvatar}>
-            <Tooltip title="Зберегти зміни" arrow>
-              <SaveIcon />
+            <Divider />
+            <CardActions>
+              <Tooltip title="Змінити автарку" arrow>
+                <IconButton onClick={handleMenuOpen}>
+                  <PersonIcon />
+                </IconButton>
               </Tooltip>
+              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose} PaperProps={{ style: { width: '450px' } }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', padding: '16px' }}>
+                  {avatars.map((avatar, index) => (
+                    <MenuItem key={index} onClick={() => handleAvatarChange(avatar)}>
+                      <Avatar alt={`Аватар ${index + 1}`} src={avatar} sx={{ width: '100px', height: '100px', marginRight: '5px' }} />
+                    </MenuItem>
+                  ))}
+                </div>
+              </Menu>
+              <IconButton onClick={handleSaveAvatar}>
+                <Tooltip title="Зберегти зміни" arrow>
+                  <SaveIcon />
+                </Tooltip>
               </IconButton>
-            <Tooltip title="Вихід" arrow>
-            <IconButton onClick={handleLogout}>
-              <ExitToAppIcon />
-            </IconButton>
-            </Tooltip>
-          </CardActions>
-          <Divider />
-          <List>
-            <ListItem button component={Link} to="/">
-              <HomeIcon />
-              <ListItemText primary="Головна" />
-            </ListItem>
+              <Tooltip title="Вихід" arrow>
+                <IconButton onClick={handleLogout}>
+                  <ExitToAppIcon />
+                </IconButton>
+              </Tooltip>
+            </CardActions>
             <Divider />
-            <ListItem button onClick={() => setIsDashboardVisible(true)}>
-              <BarChartIcon />
-              <ListItemText primary="Збережені графіки" />
-            </ListItem>
+            <List>
+              <ListItem button component={Link} to="/" onClick={handleOpenDashboard}>
+                <HomeIcon />
+                <ListItemText primary="Головна" />
+              </ListItem>
+              <Divider />
+              <ListItem button onClick={handleOpenDashboard}>
+                <BarChartIcon />
+                <ListItemText primary="Збережені графіки" />
+              </ListItem>
+              <Divider />
+              <ListItem button component={Link} to="/createchart" onClick={handleOpenTableCreate}>
+                <AddchartIcon />
+                <ListItemText primary="Створити графік" />
+              </ListItem>
+              <Divider />
+              <ListItem button onClick={handleOpenTableCreate}>
+                <TableRowsIcon />
+                <ListItemText primary="Таблиці" />
+              </ListItem>
+              <ListItem button onClick={handleOpenTableExport}>
+                <TableRowsIcon />
+                <ListItemText primary="Експорт таблиці" />
+              </ListItem>
+              <Divider />
+              <ListItem button component={Link} to="/usersettings">
+                <SettingsIcon />
+                <ListItemText primary="Налаштування" />
+              </ListItem>
+            </List>
             <Divider />
-            <ListItem button component={Link} to="/createchart">
-              <AddchartIcon />
-              <ListItemText primary="Створити графік" />
-            </ListItem>
-            <Divider />
-            <ListItem button onClick={handleOpenTableCreate}>
-              <TableRowsIcon />
-              <ListItemText primary="Таблиці" />
-            </ListItem>
-            <Divider />
-            <ListItem button component={Link} to="/usersettings">
-              <SettingsIcon />
-              <ListItemText primary="Налаштування" />
-            </ListItem>
-          </List>
-          <Divider />
-        </Box>
+          </Box>
 
-        <Box sx={{ flexGrow: 1, p: 3, marginLeft: '300px' }}>
-          {isDashboardVisible && <Dashboard />}
-          {isTableCreateVisible && <TableCreate />}
+          <Box sx={{ flexGrow: 1, p: 3, marginLeft: '300px' }}>
+            {isDashboardVisible && <Dashboard />}
+            {isTableCreateVisible && <TableCreate />}
+            {isTableExportVisible && <ExportTable />}
+          </Box>
         </Box>
-      </Box>
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+      </div>
     </div>
   );
 };

@@ -39,6 +39,14 @@
       "avatarUrl": "/static/media/Avatar2.4066e974da1691330dd3.png",
       "isLoggedIn": false,
       "id": 4
+    },
+    {
+      "username": "Влад",
+      "email": "moshak.vladyslav@student.uzhnu.edu.ua",
+      "password": "123123",
+      "avatarUrl": "/static/media/Avatar2.4066e974da1691330dd3.png",
+      "isLoggedIn": true,
+      "id": 5
     }
   ],
   "charts": [
@@ -276,5 +284,4 @@
       "id": 20
     }
   ]
- 
 }

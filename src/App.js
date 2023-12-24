@@ -7,8 +7,6 @@ import Home from './components/pages/Home';
 import CreateChart from './components/pages/CreateChart/createChart';
 import UserProfile from './components/pages/UserProfile/UserProfile';
 import UserSettingsForm from './components/pages/usersettings';
-
-
 function App() {
   return (
     

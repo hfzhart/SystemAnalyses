@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { AppBar,  Toolbar,  Typography,  Container,  Grid,  Paper,Table,  TableContainer, TableHead, TableRow,  TableCell,  TableBody,  IconButton,  Button,  TextField,} from '@mui/material';
+import { AppBar, Toolbar, Typography, Container, Grid, Paper, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, IconButton, Button, TextField } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Resizable } from 'react-resizable';
+import 'react-resizable/css/styles.css'; // Import the styles for react-resizable
 
 const styles = {
   container: {
@@ -13,15 +15,20 @@ const styles = {
     position: 'static',
     zIndex: 'auto',
   },
-  pinnedPaper: {
-    marginBottom: '20px',
-    position: 'fixed',
-    zIndex: 100,
-  },
   menuTextField: {
-    marginBottom: '15px', 
+    marginBottom: '15px',
   },
 };
+
+const ResizableCell = ({ width, onResize, children, ...restProps }) => (
+  <Resizable width={width} height={0} onResize={onResize}>
+    <TableCell {...restProps}>
+      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        {children}
+      </div>
+    </TableCell>
+  </Resizable>
+);
 
 const TableCreate = () => {
   const [tables, setTables] = useState([]);
@@ -81,6 +88,14 @@ const TableCreate = () => {
     setEditIndex(null);
   };
 
+  const handleResize = (newWidth, tableIndex, columnIndex) => {
+    const updatedTables = [...tables];
+    updatedTables[tableIndex].data.forEach((row) => {
+      row[columnIndex] = ''; // Reset cell content on resize for simplicity
+    });
+    setTables(updatedTables);
+  };
+
   const handleCellChange = (tableIndex, rowIndex, columnIndex, value) => {
     const updatedTables = [...tables];
     updatedTables[tableIndex].data[rowIndex][columnIndex] = value;
@@ -113,7 +128,15 @@ const TableCreate = () => {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell>{table.name}</TableCell>
+                        {table.data[0].map((_, columnIndex) => (
+                          <ResizableCell
+                            key={columnIndex}
+                            width={100} // Initial width, adjust as needed
+                            onResize={(e, { size }) => handleResize(size.width, tableIndex, columnIndex)}
+                          >
+                            <Typography>{`Column ${columnIndex + 1}`}</Typography>
+                          </ResizableCell>
+                        ))}
                         <TableCell>
                           <IconButton onClick={() => handleEditTable(tableIndex)}>
                             <EditIcon />
@@ -128,12 +151,16 @@ const TableCreate = () => {
                       {table.data.map((row, rowIndex) => (
                         <TableRow key={rowIndex}>
                           {row.map((cell, columnIndex) => (
-                            <TableCell key={columnIndex}>
+                            <ResizableCell
+                              key={columnIndex}
+                              width={100} // Initial width, adjust as needed
+                              onResize={(e, { size }) => handleResize(size.width, tableIndex, columnIndex)}
+                            >
                               <TextField
                                 value={cell}
                                 onChange={(e) => handleCellChange(tableIndex, rowIndex, columnIndex, e.target.value)}
                               />
-                            </TableCell>
+                            </ResizableCell>
                           ))}
                         </TableRow>
                       ))}
