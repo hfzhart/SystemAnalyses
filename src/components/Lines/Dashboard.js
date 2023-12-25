@@ -24,7 +24,7 @@ const Dashboard = () => {
     <Card>
       <CardContent>
         <Typography variant="h5" component="div">
-          Дашборд
+          Збережені графіки
         </Typography>
         <IconButton
           style={{ marginLeft: 'auto' }}

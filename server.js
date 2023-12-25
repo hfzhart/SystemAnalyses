@@ -23,17 +23,18 @@ server.use((req, res, next) => {
 
 server.patch('/users/:id', (req, res) => {
   const userId = parseInt(req.params.id);
-  const { isLoggedIn } = req.body;
+  const { isLoggedIn, email, password } = req.body;
   const user = db.get('users').find({ id: userId });
+
   if (user.value()) {
-  
-    user.assign({ isLoggedIn }).write();
-    res.status(200).json({ success: true, message: 'User updated successfully' });
+    user.assign({ isLoggedIn, email, password }).write();
+    const updatedUser = user.value(); // Получаем обновленные данные пользователя
+    res.status(200).json({ success: true, message: 'User updated successfully', user: updatedUser });
   } else {
-  
     res.status(404).json({ success: false, message: 'User not found' });
   }
 });
+
 
 server.use(router);
 
